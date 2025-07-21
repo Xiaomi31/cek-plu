@@ -1,27 +1,30 @@
 let dataExcel = [];
 
-document.getElementById('excelFile').addEventListener('change', function(e) {
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    const data = new Uint8Array(e.target.result);
-    const workbook = XLSX.read(data, {type: 'array'});
+// Ganti URL berikut dengan URL file Excel mentah kamu dari GitHub
+const excelURL = "https://raw.githubusercontent.com/username/repo/main/database.xlsx";
+
+// Ambil dan baca file Excel dari GitHub
+fetch(excelURL)
+  .then(response => response.arrayBuffer())
+  .then(data => {
+    const workbook = XLSX.read(data, { type: "array" });
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
     dataExcel = XLSX.utils.sheet_to_json(sheet);
-    alert("Database berhasil dimuat! Baris: " + dataExcel.length);
-  };
-  reader.readAsArrayBuffer(e.target.files[0]);
-});
+    console.log("Database berhasil dimuat! Baris:", dataExcel.length);
+  })
+  .catch(err => {
+    alert("Gagal mengambil file Excel dari GitHub: " + err.message);
+  });
 
 function searchPLU() {
-  const input = document.getElementById('searchInput').value.trim();
+  const input = document.getElementById("searchInput").value.trim();
   const result = dataExcel.find(row => row.PLU == input || row.Barcode == input);
-  const resultDiv = document.getElementById('result');
+  const resultDiv = document.getElementById("result");
 
   if (result) {
     resultDiv.innerHTML = `
       <strong>Deskripsi:</strong> ${result.Deskripsi}<br>
-      <strong>Supco:</strong> ${result.Supco || "-"}<br>      
       <strong>Supplier:</strong> ${result.Supplier || "-"}<br>
       <strong>Harga:</strong> ${result.Harga || "-"}
     `;
