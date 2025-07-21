@@ -39,15 +39,14 @@ function searchPLU() {
 
   if (result) {
     resultDiv.innerHTML = `
-      <strong>DESC:</strong> ${result.DESC}<br>
-     
-      <strong>SUPCO:</strong> ${result.SUPCO || "-"}<br>
-      <strong>SUPPLIER:</strong> ${result.SUPPLIER || "-"}<br>
-      <strong>KDSB:</strong> ${result.KDSB || "-"}<br>
-      <strong>COVERAGE:</strong> ${result.COVERAGE || "-"}<br>
-      <strong>TAG:</strong> ${result.TAG || "-"}<br>
-      <strong>PTAG:</strong> ${result.PTAG || "-"}
-      <strong>STOK:</strong> ${result.STOK || "-"}
+      <strong>DESC     :</strong> ${result.DESC}<br>
+      <strong>SUPCO    :</strong> ${result.SUPCO || "-"}<br>
+      <strong>SUPPLIER :</strong> ${result.SUPPLIER || "-"}<br>
+      <strong>KDSB     :</strong> ${result.KDSB || "-"}<br>
+      <strong>COVERAGE :</strong> ${result.COVERAGE || "-"}<br>
+      <strong>TAG      :</strong> ${result.TAG || "-"}<br>
+      <strong>PTAG     :</strong> ${result.PTAG || "-"}
+      <strong>STOK     :</strong> ${result.STOK || "-"}
     `;
   } else {
     resultDiv.innerHTML = "Data tidak ditemukan.";
