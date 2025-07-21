@@ -21,6 +21,7 @@ function searchPLU() {
   if (result) {
     resultDiv.innerHTML = `
       <strong>Deskripsi:</strong> ${result.Deskripsi}<br>
+      <strong>Supco:</strong> ${result.Supco || "-"}<br>      
       <strong>Supplier:</strong> ${result.Supplier || "-"}<br>
       <strong>Harga:</strong> ${result.Harga || "-"}
     `;
