@@ -40,6 +40,7 @@ function searchPLU() {
   if (result) {
     resultDiv.innerHTML = `
       <strong>DESC:</strong> ${result.DESC}<br>
+     
       <strong>SUPCO:</strong> ${result.SUPCO || "-"}<br>
       <strong>SUPPLIER:</strong> ${result.SUPPLIER || "-"}<br>
       <strong>KDSB:</strong> ${result.KDSB || "-"}<br>
