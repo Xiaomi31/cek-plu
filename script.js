@@ -39,9 +39,14 @@ function searchPLU() {
 
   if (result) {
     resultDiv.innerHTML = `
-      <strong>Deskripsi:</strong> ${result.Deskripsi}<br>
-      <strong>Supplier:</strong> ${result.Supplier || "-"}<br>
-      <strong>Harga:</strong> ${result.Harga || "-"}
+      <strong>DESC:</strong> ${result.DESC}<br>
+      <strong>SUPCO:</strong> ${result.SUPCO}<br>
+      <strong>SUPPLIER:</strong> ${result.SUPPLIER || "-"}<br>
+      <strong>KDSB:</strong> ${result.KDSB}<br>
+      <strong>COVERAGE:</strong> ${result.COVERAGE}<br>
+      <strong>TAG:</strong> ${result.TAG}<br>
+      <strong>PTAG:</strong> ${result.PTAG || "-"}
+      <strong>STOK_02:</strong> ${result.STOK_02 || "-"}
     `;
   } else {
     resultDiv.innerHTML = "Data tidak ditemukan.";
