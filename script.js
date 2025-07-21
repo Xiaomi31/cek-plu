@@ -1,9 +1,9 @@
 let dataExcel = [];
 
-// Ganti URL berikut dengan URL file Excel mentah kamu dari GitHub
+// Ganti URL berikut dengan URL mentah file Excel dari GitHub kamu
 const excelURL = "https://raw.githubusercontent.com/username/repo/main/database.xlsx";
 
-// Ambil dan baca file Excel dari GitHub
+// 1️⃣ Otomatis ambil database dari GitHub saat pertama kali
 fetch(excelURL)
   .then(response => response.arrayBuffer())
   .then(data => {
@@ -11,12 +11,27 @@ fetch(excelURL)
     const sheetName = workbook.SheetNames[0];
     const sheet = workbook.Sheets[sheetName];
     dataExcel = XLSX.utils.sheet_to_json(sheet);
-    console.log("Database berhasil dimuat! Baris:", dataExcel.length);
+    console.log("Database berhasil dimuat dari GitHub! Baris:", dataExcel.length);
   })
   .catch(err => {
-    alert("Gagal mengambil file Excel dari GitHub: " + err.message);
+    alert("Gagal mengambil database dari GitHub: " + err.message);
   });
 
+// 2️⃣ Fitur upload file manual
+document.getElementById('excelFile').addEventListener('change', function(e) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const data = new Uint8Array(e.target.result);
+    const workbook = XLSX.read(data, {type: 'array'});
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
+    dataExcel = XLSX.utils.sheet_to_json(sheet);
+    alert("Database berhasil diupload! Baris: " + dataExcel.length);
+  };
+  reader.readAsArrayBuffer(e.target.files[0]);
+});
+
+// 3️⃣ Fungsi pencarian
 function searchPLU() {
   const input = document.getElementById("searchInput").value.trim();
   const result = dataExcel.find(row => row.PLU == input || row.Barcode == input);
